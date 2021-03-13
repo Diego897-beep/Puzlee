@@ -1,5 +1,12 @@
-﻿  Source.cpp
-  UtilidadesSYS.cpp
+﻿  coordenada.cpp
+D:\Puzlee\puzlee\matriz.h(18,38): error C2061: error de sintaxis: identificador 'istream'
+D:\Puzlee\puzlee\matriz.h(22,35): error C2061: error de sintaxis: identificador 'tCoor'
+D:\Puzlee\puzlee\matriz.h(35,38): error C2061: error de sintaxis: identificador 'tCoor'
+  juegoPM.cpp
+  matriz.cpp
+  Source.cpp
+D:\Puzlee\puzlee\matriz.h(18,38): error C2061: error de sintaxis: identificador 'istream'
+D:\Puzlee\puzlee\matriz.h(22,35): error C2061: error de sintaxis: identificador 'tCoor'
+D:\Puzlee\puzlee\matriz.h(35,38): error C2061: error de sintaxis: identificador 'tCoor'
+D:\Puzlee\puzlee\juegoPM.h(17,36): error C2061: error de sintaxis: identificador 'string'
   Generando código...
-MSVCRTD.lib(exe_main.obj) : error LNK2019: símbolo externo _main sin resolver al que se hace referencia en la función "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
-D:\Puzlee\puzlee\Debug\puzlee.exe : fatal error LNK1120: 1 externos sin resolver

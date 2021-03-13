@@ -2,13 +2,19 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
+
 #include "matriz.h"
+#include "UtilidadesSYS.h"
+
+using namespace std;
 
 
 struct tJuegoPM {
 	tMatrizChar imagenJugador;
 	tMatrizChar imagenObjetivo;
 	int maxIntentos = 0;
+	int intentosActuales = 0;
 	int modo = 0;
 };
 

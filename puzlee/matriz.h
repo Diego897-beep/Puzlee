@@ -6,7 +6,10 @@
 
 const int MAX_DIM = 64;
 
-typedef char tMatriz[MAX_DIM][MAX_DIM];
+typedef unsigned char uchar;
+
+typedef uchar tVector[MAX_DIM];
+typedef uchar tMatriz[MAX_DIM][MAX_DIM];
 
 struct tMatrizChar {
 	tMatriz elementos;
@@ -33,4 +36,4 @@ void rotarD(tMatrizChar& mat);
 
 bool swapAdy(tMatrizChar& mat, tCoor pos1, tCoor pos2);
 
-bool VoltearID(tMatrizChar& mat);
+bool voltearID(tMatrizChar& mat);
