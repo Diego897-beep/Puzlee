@@ -190,27 +190,17 @@ bool voltearD(tMatrizChar& mat, int d) {
 };
 
 void voltearV(tMatrizChar& mat) {
-	for (int i = 0; i < mat.numC; i++) {
-		swapC(mat, i, );		
+	for (int i = 0; i < (mat.numC / 2); i++) {
+		swapC(mat, i, mat.numC - 1 - i);
 	}
-	/*
-	tMatrizChar mat_i;
-	mat_i.numC = mat.numC;
-	mat_i.numF = mat.numF;
-	for (int i = 0; i < mat.numF; i++) {
-		for (int j = 0; j < mat.numC; j++) {
-			mat_i.elementos[i][j] = mat.elementos[i][j];
-		}
-	}
-
-	for (int i = 0; i < mat.numF; i++) {
-		for (int j = 0; j < mat.numC; j++) {
-			mat.elementos[i][j] = mat_i.elementos[i][j];
-		}
-	}*/
+	
 }
 
-void voltearH(tMatrizChar& mat);
+void voltearH(tMatrizChar& mat) {
+	for (int i = 0; i < (mat.numC / 2); i++) {
+		swapF(mat, i, mat.numC - 1 - i);
+	}
+};
 
 void rotarD(tMatrizChar& mat) {
 	tMatrizChar aux = mat;
