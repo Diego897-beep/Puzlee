@@ -1,9 +1,25 @@
 #include "matriz.h"
 
-bool cargar(tMatrizChar& mat, istream& ent) {
+bool cargar(tMatrizChar& mat, ifstream& ent) {
+	bool ok = true;
+	int aux = 0;
+
+	ent >> mat.numF >> mat.numC;
+
+	if (mat.numF < 0 || mat.numF >= MAX_DIM || mat.numC < 0 || mat.numC >= MAX_DIM) {
+		ok = false;
+	}
+	else {
+		for (int f = 0; f < mat.numF; f++) {
+			for (int c = 0; c < mat.numC; c++) {
+				ent >> aux;
+				mat.elementos[f][c] = uchar(aux);
+			}
+		}
+	}
 	
-	return true;
-};
+	return ok;
+}
 
 bool operator == (const tMatrizChar& mat1, const tMatrizChar& mat2) {
 	bool sonIguales = true;
@@ -216,8 +232,16 @@ void rotarD(tMatrizChar& mat) {
 }
 
 bool swapAdy(tMatrizChar& mat, tCoor pos1, tCoor pos2) {
-
-	// se pueden voltear las que estan pegadas a los margenes?
+	bool sePuede = true;
+	if (!vecinosValidos(mat, pos1, pos2)) {
+		sePuede = false;
+	}
+	else {
+		for (int i = 0; i < 8; i++) {
+			swap(mat, {pos1.F + vecF[i], pos1.C + vecC[i]}, { pos2.F + vecF[i], pos2.C + vecC[i] });
+		}
+	}
+	return sePuede;
 }
 
 bool voltearID(tMatrizChar& mat) {
@@ -239,6 +263,5 @@ bool voltearID(tMatrizChar& mat) {
 			}
 		}
 	}
-
 	return sePuede;
 }

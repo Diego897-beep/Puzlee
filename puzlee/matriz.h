@@ -4,6 +4,8 @@
 #include <fstream>
 #include "coordenada.h"
 
+using namespace std;
+
 const int MAX_DIM = 64;
 
 typedef unsigned char uchar;
@@ -17,7 +19,7 @@ struct tMatrizChar {
 	int numC;
 };
 
-bool cargar(tMatrizChar& mat, istream& ent);
+bool cargar(tMatrizChar& mat, ifstream& ent);
 
 bool operator == (const tMatrizChar& mat1, const tMatrizChar& mat2);
 

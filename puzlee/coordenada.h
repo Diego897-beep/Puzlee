@@ -1,7 +1,10 @@
-#pragma once
+﻿#pragma once
 
 #include <iostream>
 #include "matriz.h"
+
+const int vecF[8] = {-1, -1, -1, 0, 0, 1, 1, 1}; 
+const int vecC[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
 
 struct tCoor {
 	int F = 0;
@@ -22,3 +25,5 @@ bool coordenadaValida(const tMatrizChar& m, tCoor c);
 
 // Devuelve la suma de dos coordenadas
 tCoor operator + (tCoor c1, tCoor c2);
+
+bool vecinosValidos(tMatrizChar& mat, tCoor pos1, tCoor pos2);
