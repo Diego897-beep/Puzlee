@@ -20,8 +20,8 @@ struct tJuegoPM {
 
 void mainJuegoPM();
 int menu();
-bool iniciar(tJuegoPM& jpm, string modo);
+bool iniciar(tJuegoPM& jpm);
 bool cargar(tJuegoPM& jpm);
 void mostrar(const tJuegoPM& jpm);
 bool jugar(tJuegoPM& jpm);
-void accion(tJuegoPM& jpm);
+bool accion(tJuegoPM& jpm);

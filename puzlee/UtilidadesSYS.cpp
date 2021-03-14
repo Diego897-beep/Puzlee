@@ -4,20 +4,17 @@
 using namespace std;
 
 
-void chcp1252()
-{   
+void chcp1252() {   
 	//Para que se muestren correctamente los acentos por pantalla
 	system("chcp 1252");
 }
 
-void borrar()
-{
+void borrar() {
 	// Para borrar la consola 
 	system("cls");
 }
 
-void pausa()
-{
+void pausa() {
 	system("pause");
 }
 
@@ -25,8 +22,8 @@ void pausa()
 uint8 colores[10] = { 0, 12, 10, 9, 14, 13, 3, 15, 8, 11 };
 // negro(0), rojo(12), verde(10), azul(9), amarillo(14), magenta(13), cian2(3), blanco(15), gris(8), cian1(11) 
 
-void colorCTA(uint8 color, uint8 fondo)  // fondo es un dígito
-{   
+void colorCTA(uint8 color, uint8 fondo) { // fondo es un dígito
+
 	/* comentarios acerca de los colores:
 	-----------------------------------
 	Por defecto, el color de primer plano, aquel con el que se muestran los trazos de los
@@ -34,10 +31,10 @@ void colorCTA(uint8 color, uint8 fondo)  // fondo es un dígito
 	colores,  aunque debemos hacerlo utilizando rutinas que son específicas
 	de Visual Studio, por lo que debemos ser conscientes de que el programa no será
 	portable a otros compiladores.
-	
+
 	Disponemos de 16 colores diferentes entre los que elegir, con valores de 0 a 15, tanto
 	para el primer plano como para el fondo.
-	
+
 	Visual Studio incluye una biblioteca, Windows.h, que tiene, entre otras, rutinas para la
 	consola. Una de ellas es SetConsoleTextAttribute(), que permite ajustar los colores
 	de fondo y primer plano.
@@ -45,7 +42,7 @@ void colorCTA(uint8 color, uint8 fondo)  // fondo es un dígito
 	Este se utiliza para cambiar el color de la pantalla de texto.
 	El color al que cambia es colores[fondo].
 	Los atributos de cada pixel se guardan en un byte y cada bit
-	representa un aspecto del pixel. 
+	representa un aspecto del pixel.
 	Con la expresión: color | (colores[fondo] << 4)
 	Se modifica el bit del color de fondo.
 
@@ -55,6 +52,4 @@ void colorCTA(uint8 color, uint8 fondo)  // fondo es un dígito
 
 	*/
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color | (colores[fondo] << 4));
-
-	
 }

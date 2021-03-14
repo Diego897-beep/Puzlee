@@ -11,7 +11,8 @@ using namespace std;
 
 int main() {
 
-	//mainJuegoPM();
+	mainJuegoPM();
+	//Pd: Yoli te queremos <3
 
 	return 0;
 }
