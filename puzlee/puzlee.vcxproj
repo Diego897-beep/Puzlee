@@ -151,6 +151,20 @@
     <ClInclude Include="matriz.h" />
     <ClInclude Include="UtilidadesSYS.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="fichSA_2D.txt" />
+    <Text Include="fichSC_1D.txt" />
+    <Text Include="fichSD_1D.txt" />
+    <Text Include="fichSF_1D.txt" />
+    <Text Include="fichVC_1D.txt" />
+    <Text Include="fichVD_1D.txt" />
+    <Text Include="fichVD_2D.txt" />
+    <Text Include="fichVF_1D.txt" />
+    <Text Include="patitaRD_2D.txt" />
+    <Text Include="patitaVH_2D.txt" />
+    <Text Include="patitaVV_2D.txt" />
+    <Text Include="torre1_1D.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

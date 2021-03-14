@@ -45,4 +45,42 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="fichSA_2D.txt">
+      <Filter>Archivos de recursos</Filter>
+    </Text>
+    <Text Include="fichSC_1D.txt">
+      <Filter>Archivos de recursos</Filter>
+    </Text>
+    <Text Include="fichSD_1D.txt">
+      <Filter>Archivos de recursos</Filter>
+    </Text>
+    <Text Include="fichSF_1D.txt">
+      <Filter>Archivos de recursos</Filter>
+    </Text>
+    <Text Include="fichVC_1D.txt">
+      <Filter>Archivos de recursos</Filter>
+    </Text>
+    <Text Include="fichVD_1D.txt">
+      <Filter>Archivos de recursos</Filter>
+    </Text>
+    <Text Include="fichVD_2D.txt">
+      <Filter>Archivos de recursos</Filter>
+    </Text>
+    <Text Include="fichVF_1D.txt">
+      <Filter>Archivos de recursos</Filter>
+    </Text>
+    <Text Include="patitaRD_2D.txt">
+      <Filter>Archivos de recursos</Filter>
+    </Text>
+    <Text Include="patitaVH_2D.txt">
+      <Filter>Archivos de recursos</Filter>
+    </Text>
+    <Text Include="patitaVV_2D.txt">
+      <Filter>Archivos de recursos</Filter>
+    </Text>
+    <Text Include="torre1_1D.txt">
+      <Filter>Archivos de recursos</Filter>
+    </Text>
+  </ItemGroup>
 </Project>
