@@ -50,7 +50,7 @@ bool swap(tMatrizChar& mat, tCoor pos1, tCoor pos2) {
 	bool sePuede = true;
 	
 
-	if (!coordenadaValida(mat, pos1) || !coordenadaValida(mat, pos2)) {
+	if (!coordenadaValida(mat, pos1, pos2)) {
 		sePuede = false;
 	}
 	else {

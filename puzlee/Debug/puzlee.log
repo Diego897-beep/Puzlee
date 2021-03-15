@@ -1,12 +1,27 @@
 ﻿  coordenada.cpp
-D:\Puzlee\puzlee\matriz.h(18,38): error C2061: error de sintaxis: identificador 'istream'
-D:\Puzlee\puzlee\matriz.h(22,35): error C2061: error de sintaxis: identificador 'tCoor'
-D:\Puzlee\puzlee\matriz.h(35,38): error C2061: error de sintaxis: identificador 'tCoor'
+D:\Puzlee\puzlee\matriz.h(26,35): error C2061: error de sintaxis: identificador 'tCoor'
+D:\Puzlee\puzlee\matriz.h(39,38): error C2061: error de sintaxis: identificador 'tCoor'
   juegoPM.cpp
+D:\Puzlee\puzlee\coordenada.h(24,40): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+D:\Puzlee\puzlee\coordenada.h(24,40): error C2143: error de sintaxis: falta ',' delante de '&'
+D:\Puzlee\puzlee\coordenada.h(29,21): error C2065: 'tMatrizChar': identificador no declarado
+D:\Puzlee\puzlee\coordenada.h(29,34): error C2065: 'mat': identificador no declarado
+D:\Puzlee\puzlee\coordenada.h(29,39): error C2275: 'tCoor': uso no válido de este tipo como expresión
+D:\Puzlee\puzlee\coordenada.h(9): message : vea la declaración de 'tCoor'
+D:\Puzlee\puzlee\coordenada.h(29,45): error C2146: error de sintaxis: falta ')' delante del identificador 'pos1'
+D:\Puzlee\puzlee\juegoPM.cpp(55,11): warning C4834: se descarta el valor devuelto de la función con el atributo "nodiscard"
+D:\Puzlee\puzlee\juegoPM.cpp(58,11): warning C4834: se descarta el valor devuelto de la función con el atributo "nodiscard"
   matriz.cpp
+D:\Puzlee\puzlee\coordenada.h(24,40): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+D:\Puzlee\puzlee\coordenada.h(24,40): error C2143: error de sintaxis: falta ',' delante de '&'
+D:\Puzlee\puzlee\coordenada.h(29,21): error C2065: 'tMatrizChar': identificador no declarado
+D:\Puzlee\puzlee\coordenada.h(29,34): error C2065: 'mat': identificador no declarado
+D:\Puzlee\puzlee\coordenada.h(29,39): error C2275: 'tCoor': uso no válido de este tipo como expresión
+D:\Puzlee\puzlee\coordenada.h(9): message : vea la declaración de 'tCoor'
+D:\Puzlee\puzlee\coordenada.h(29,45): error C2146: error de sintaxis: falta ')' delante del identificador 'pos1'
+D:\Puzlee\puzlee\matriz.cpp(53,5): error C2661: 'coordenadaValida': ninguna función sobrecargada acepta 3 argumentos
+D:\Puzlee\puzlee\matriz.cpp(236,7): error C3861: 'vecinosValidos': no se encontró el identificador
   Source.cpp
-D:\Puzlee\puzlee\matriz.h(18,38): error C2061: error de sintaxis: identificador 'istream'
-D:\Puzlee\puzlee\matriz.h(22,35): error C2061: error de sintaxis: identificador 'tCoor'
-D:\Puzlee\puzlee\matriz.h(35,38): error C2061: error de sintaxis: identificador 'tCoor'
-D:\Puzlee\puzlee\juegoPM.h(17,36): error C2061: error de sintaxis: identificador 'string'
+D:\Puzlee\puzlee\matriz.h(26,35): error C2061: error de sintaxis: identificador 'tCoor'
+D:\Puzlee\puzlee\matriz.h(39,38): error C2061: error de sintaxis: identificador 'tCoor'
   Generando código...

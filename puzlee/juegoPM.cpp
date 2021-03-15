@@ -1,5 +1,7 @@
 #include "juegoPM.h"
 
+void mostrarHelp();
+
 void mainJuegoPM() {
 	tJuegoPM juego;
 	int modo = menu();
@@ -14,7 +16,7 @@ void mainJuegoPM() {
 			cout << "LO CONSEGUISTE!!!";
 		}
 		else {
-			cout << "perdiste puto :(";
+			cout << "Perdiste puto :(";
 		}
 	}
 }
@@ -132,11 +134,10 @@ bool accion(tJuegoPM& jpm) {
 	char accion;
 	int aux1 = 0, aux2 = 0, aux3 = 0, aux4 = 0;
 
-	cout << "Introduzca una accion: (Solo el comando) (help )  ";
+	cout << "Introduzca una accion: (help  para ayuda)  ";
 	cin >> accion >> aux1 >> aux2 >> aux3 >> aux4;
 
 	bool accionPermitida = true;
-	tCoor pos1, pos2;
 	
 
 	if (jpm.modo == 1) {
