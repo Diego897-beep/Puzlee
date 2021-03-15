@@ -6,8 +6,6 @@
 
 using namespace std;
 
-const int MAX_DIM = 64;
-
 typedef unsigned char uchar;
 
 typedef uchar tVector[MAX_DIM];
@@ -39,3 +37,6 @@ void rotarD(tMatrizChar& mat);
 bool swapAdy(tMatrizChar& mat, tCoor pos1, tCoor pos2);
 
 bool voltearID(tMatrizChar& mat);
+
+bool coordenadaValida(const tMatrizChar& m, tCoor c);
+bool vecinosValidos(tMatrizChar& mat, tCoor pos1, tCoor pos2);

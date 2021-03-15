@@ -50,7 +50,7 @@ bool swap(tMatrizChar& mat, tCoor pos1, tCoor pos2) {
 	bool sePuede = true;
 	
 
-	if (!coordenadaValida(mat, pos1, pos2)) {
+	if ((!coordenadaValida(mat, pos1)) || (!coordenadaValida(mat, pos2))) {
 		sePuede = false;
 	}
 	else {
@@ -174,31 +174,14 @@ bool voltearD(tMatrizChar& mat, int d) {
 		sePuede = false;
 	}
 	else {
-		tVector diag_i;
 		if (d >= 0) {
-			for (int i = 0; i < mat.numF - d; i++) {
-				for (int j = 0; j < mat.numC - d; j++){
-					diag_i[i] = mat.elementos[i][j + d];
-				}
-			}
-
-			for (int i = 0; i < mat.numF - d; i++) {
-				for (int j = 0; j < mat.numC - d; j++){
-					mat.elementos[i][j + d] = diag_i[mat.numF - d - i];
-				}
+			for (int i = 0; i < mat.numF - 1 - d; i++) {
+				swap(mat, { i, i + d }, { mat.numF - 1 - i - d, mat.numC - 1 - i });
 			}
 		}
 		else {
-			for (int i = 0; i < mat.numF + d; i++) {
-				for (int j = 0; j < mat.numC + d; j++){
-					diag_i[i] = mat.elementos[i - d][j];
-				}
-			}
-
-			for (int i = 0; i < mat.numF; i++) {
-				for (int j = 0; j < mat.numC; j++){
-					mat.elementos[i - d][j] = diag_i[mat.numF + d - i];
-				}
+			for (int i = 0; i < mat.numF - 1 + d; i++) {
+				swap(mat, { i - d, i }, { mat.numF - 1 - i, mat.numC - 1 - i + d });
 			}
 		}
 	}
@@ -209,14 +192,13 @@ void voltearV(tMatrizChar& mat) {
 	for (int i = 0; i < (mat.numC / 2); i++) {
 		swapC(mat, i, mat.numC - 1 - i);
 	}
-	
 }
 
 void voltearH(tMatrizChar& mat) {
-	for (int i = 0; i < (mat.numC / 2); i++) {
-		swapF(mat, i, mat.numC - 1 - i);
+	for (int i = 0; i < (mat.numF / 2); i++) {
+		swapF(mat, i, mat.numF - 1 - i);
 	}
-};
+}
 
 void rotarD(tMatrizChar& mat) {
 	tMatrizChar aux = mat;
@@ -224,8 +206,8 @@ void rotarD(tMatrizChar& mat) {
 	mat.numF = aux.numC;
 	mat.numC = aux.numF;
 
-	for (int fila = 0; fila < mat.numF; fila++) {
-		for (int col = 0; col < mat.numC; col++) {
+	for (int fila = 0; fila < aux.numF; fila++) {
+		for (int col = 0; col < aux.numC; col++) {
 			mat.elementos[col][aux.numF - 1 - fila] = aux.elementos[fila][col];
 		}
 	}
@@ -247,21 +229,31 @@ bool swapAdy(tMatrizChar& mat, tCoor pos1, tCoor pos2) {
 bool voltearID(tMatrizChar& mat) {
 	bool sePuede = true;
 
-	if (mat.numF != mat.numF) {
+	if (mat.numF != mat.numC) {
 		sePuede = false;
 	}
 
 	else {
-		uchar aux = 'a';
-
 		for (int fila = 0; fila < mat.numF; fila++) {
-			for (int col = 0; col < mat.numC; col++) {
-				aux = mat.elementos[fila][col];
-
-				mat.elementos[fila][col] = mat.elementos[col][fila];
-				mat.elementos[col][fila] = aux;
+			for (int col = fila; col < mat.numC; col++) {
+				swap(mat, { fila, col }, { col, fila });
 			}
 		}
 	}
 	return sePuede;
+}
+
+bool vecinosValidos(tMatrizChar& mat, tCoor pos1, tCoor pos2) {
+	bool val = true;
+	if (pos1.F == 0 || pos1.F == mat.numF - 1 || pos1.C == 0 || pos1.C == mat.numC - 1 || pos2.F == 0 || pos2.F == mat.numF - 1 || pos2.C == 0 || pos2.C == mat.numC - 1) {
+		val = false;
+	}
+	else if (abs(pos1.F - pos2.F) < 3 && abs(pos1.C - pos2.C) < 3) {
+		val = false;
+	}
+	return val;
+}
+
+bool coordenadaValida(const tMatrizChar& m, tCoor c) {
+	return coordenadaValida(c) && c.F < m.numF&& c.C < m.numC;
 }

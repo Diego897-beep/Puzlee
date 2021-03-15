@@ -1,7 +1,8 @@
 ﻿#pragma once
 
 #include <iostream>
-#include "matriz.h"
+
+const int MAX_DIM = 64;
 
 const int vecF[8] = {-1, -1, -1, 0, 0, 1, 1, 1}; 
 const int vecC[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
@@ -20,10 +21,5 @@ bool operator != (tCoor c1, tCoor c2);
 // Comprueba si una coordenada esta dentro del rango permitido
 bool coordenadaValida(tCoor c);
 
-// Comprueba si una coordenada esta dentro del rango de una matriz
-bool coordenadaValida(const tMatrizChar& m, tCoor c);
-
 // Devuelve la suma de dos coordenadas
 tCoor operator + (tCoor c1, tCoor c2);
-
-bool vecinosValidos(tMatrizChar& mat, tCoor pos1, tCoor pos2);
