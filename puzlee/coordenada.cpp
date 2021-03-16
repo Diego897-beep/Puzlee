@@ -15,4 +15,3 @@ bool coordenadaValida(tCoor c) {
 tCoor operator + (tCoor c1, tCoor c2) {
 	return {c1.F + c2.F, c1.C + c2.C};
 }
-

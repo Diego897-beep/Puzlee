@@ -1,16 +1,15 @@
 #include "juegoPM.h"
 
-void mostrarHelp();
-int acciones(string comando, int modo);
+void mostrarHelp(); // Hace un cout de todos los comandos disponnibles
+int acciones(string comando, int modo); // Devuelve un entero en funcion del comando introducido y del modo en el que este el jugador
 
 void mainJuegoPM() {
 	tJuegoPM juego;
-	int modo = menu();
+	
 	bool haGanado = true;
 
-	juego.modo = modo;
-
-	if (juego.modo != 0 && iniciar(juego)) {
+	// Si inicia correctamente procede a jugar
+	if (iniciar(juego)) {
 		haGanado = jugar(juego);
 
 		if (haGanado) {
@@ -44,9 +43,16 @@ int menu() {
 bool iniciar(tJuegoPM& jpm) {
 	bool ok = false;
 
-	if (cargar(jpm)){
+	// Muestra el menu y devuelve el modo escogido
+	int modo = menu();
+
+	jpm.modo = modo;
+
+	// Si carga el modulo correctamente devuelve true
+	if (jpm.modo != 0 && cargar(jpm)){
 		ok = true;
 	}
+
 	return ok;
 }
 
@@ -54,9 +60,11 @@ bool cargar(tJuegoPM& jpm) {
 	string fichero;
 	bool ok = false;
 
+	// Pide al usuario el nombre del fichero
 	cout << "Introduzca el nombre del fichero: ";
 	cin >> fichero;
 
+	// Actualiza el nombre de fichero segun el modo
 	if (jpm.modo == 1) {
 		fichero += "_1D.txt";
 	}
@@ -88,7 +96,9 @@ bool cargar(tJuegoPM& jpm) {
 }
 
 void mostrar(const tJuegoPM& jpm) {
-	// Mostrar la foto del reto a resolver
+	// IMAGEN JUGADOR
+
+	// Fila de numeros
 	cout << "   ";
 	for (int i = 0; i < jpm.imagenJugador.numC; i++) {
 		if (i < 10) {
@@ -98,7 +108,10 @@ void mostrar(const tJuegoPM& jpm) {
 			cout << i;
 		}
 	}
+
 	cout << endl;
+
+	// Muestra la imagen cambiando el color del fondo
 	for (int fila = 0; fila < jpm.imagenJugador.numF; fila++) {
 		cout << setw(2) << left << fila << " ";
 		for (int col = 0; col < jpm.imagenJugador.numC; col++) {
@@ -111,7 +124,9 @@ void mostrar(const tJuegoPM& jpm) {
 
 	cout << "\n\n";
 
-	// Mostrar la foto del objetivo
+	// IMAGEN OBJETIVO
+
+	// Fila de numeros
 	cout << "   ";
 	for (int i = 0; i < jpm.imagenObjetivo.numC; i++) {
 		if (i < 10) {
@@ -121,7 +136,10 @@ void mostrar(const tJuegoPM& jpm) {
 			cout << i;
 		}
 	}
+
 	cout << endl;
+
+	// Muestra la imagen cambiando el color del fondo
 	for (int fila = 0; fila < jpm.imagenObjetivo.numF; fila++) {
 		cout << setw(2) << left << fila << " ";
 		for (int col = 0; col < jpm.imagenObjetivo.numC; col++) {
@@ -146,10 +164,12 @@ void mostrar(const tJuegoPM& jpm) {
 bool jugar(tJuegoPM& jpm) {
 	bool ganador = true;
 
+	// Muestra el tablero antes de empezar
 	mostrar(jpm);
 
-	while (jpm.intentosActuales <= jpm.maxIntentos && !(jpm.imagenJugador == jpm.imagenObjetivo)) {
+	while (jpm.intentosActuales < jpm.maxIntentos && !(jpm.imagenJugador == jpm.imagenObjetivo)) {
 
+		// Si la accion es valida cuenta un intento
 		if (accion(jpm)) {
 			jpm.intentosActuales++;
 		}
@@ -158,6 +178,7 @@ bool jugar(tJuegoPM& jpm) {
 		pausa();
 	}
 
+	// Si al acabar de jugar la imagen es distinta o se ha pasado de intentos cuenta como perdido
 	if (!(jpm.imagenJugador == jpm.imagenObjetivo)) {
 		ganador = false;
 	}
@@ -170,18 +191,22 @@ bool jugar(tJuegoPM& jpm) {
 
 bool accion(tJuegoPM& jpm) {
 	string accion, comando, espacio = " ";
-	int aux1 = 0, aux2 = 0, aux3 = 0, aux4 = 0;
+	int aux1 = -100, aux2 = -100, aux3 = -100, aux4 = -100;
 	bool accionPermitida = true;
 
+	// Pide la accion por pantalla
 	cout << "Introduzca una accion: (HP para ayuda) ";
 	
 	cin.ignore();
 	getline(cin, accion);
 
+	// Saca el comando
 	comando = accion.substr(0, accion.find(espacio));
 
+	// acciones() devuelve el numero del case en funcion del comando y del modo
 	int n = acciones(comando, jpm.modo);
 	
+	// 2 switchs, 1 para cada modo, dentro de cada uno de ellos se lee los demas numeros auxiliares
 	if (jpm.modo == 1) {
 		switch (n) {
 
@@ -285,7 +310,7 @@ bool accion(tJuegoPM& jpm) {
 			break;
 
 		default:
-			cout << "Comando no reconocido, help para mostrar comandos permitidos";
+			cout << "\n\nComando no reconocido, help para mostrar comandos permitidos\n\n";
 			accionPermitida = false;
 			break;
 		}
@@ -295,13 +320,11 @@ bool accion(tJuegoPM& jpm) {
 	}
 
 	if (!accionPermitida) {
-		cout << "No se pudo realizar la acción" << endl;
+		cout << "\n\nNo se pudo realizar la acción\n\n";
 	}
 
 	return accionPermitida;
 }
-
-
 
 void mostrarHelp() {
 	cout << "\n\n";
@@ -326,23 +349,25 @@ void mostrarHelp() {
 int acciones(string comando, int modo){
 	int ind = -1;
 
+	// Los .length() se usan para comprobar que la cadena no viene solo con el comando sin indicar los demas valores
+
 	if (modo == 1) {
-		if (comando == "SF"){
+		if (comando == "SF" && comando.length() >= 6) {
 			ind = 1;
 		}
-		else if (comando == "SC") {
+		else if (comando == "SC" && comando.length() >= 6) {
 			ind = 2;
 		}
-		else if (comando == "SD") {
+		else if (comando == "SD" && comando.length() >= 4) {
 			ind = 3;
 		}
-		else if (comando == "VF") {
+		else if (comando == "VF" && comando.length() >= 4) {
 			ind = 4;
 		}
-		else if (comando == "VC") {
+		else if (comando == "VC" && comando.length() >= 4) {
 			ind = 5;
 		}
-		else if (comando == "VD") {
+		else if (comando == "VD" && comando.length() >= 4) {
 			ind = 6;
 		}
 		else if (comando == "HP") {
@@ -360,7 +385,7 @@ int acciones(string comando, int modo){
 		else if (comando == "RD") {
 			ind = 3;
 		}
-		else if (comando == "SA") {
+		else if (comando == "SA" &&comando.length() >= 10) {
 			ind = 4;
 		}
 		else if (comando == "VD") {
