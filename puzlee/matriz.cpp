@@ -1,3 +1,5 @@
+// Authors: Carlos Barona y Diego Flores
+
 #include "matriz.h"
 
 bool cargar(tMatrizChar& mat, ifstream& ent) {
@@ -50,7 +52,7 @@ bool swap(tMatrizChar& mat, tCoor pos1, tCoor pos2) {
 	bool sePuede = true;
 	
 
-	if ((!coordenadaValida(mat, pos1)) || (!coordenadaValida(mat, pos2))) {
+	if ((!coordenadaValidaEnMatriz(mat, pos1)) || (!coordenadaValidaEnMatriz(mat, pos2))) {
 		sePuede = false;
 	}
 	else {
@@ -71,13 +73,15 @@ bool swapF(tMatrizChar& mat, int f1, int f2) {
 		sePuede = false;
 	}
 	else {
-		uchar aux = 'a';
+		//uchar aux = 'a';
 
 		for (int c = 0; c < mat.numC; c++) {
-			aux = mat.elementos[f1][c];
+			/*aux = mat.elementos[f1][c];
 
 			mat.elementos[f1][c] = mat.elementos[f2][c];
-			mat.elementos[f2][c] = aux;
+			mat.elementos[f2][c] = aux;*/
+
+			swap(mat, { f1, c }, { f2, c });
 		}
 	}
 
@@ -91,13 +95,15 @@ bool swapC(tMatrizChar& mat, int c1, int c2) {
 		sePuede = false;
 	}
 	else {
-		uchar aux = 'a';
+		//uchar aux = 'a';
 
 		for (int f = 0; f < mat.numC; f++) {
-			aux = mat.elementos[f][c1];
+			/*aux = mat.elementos[f][c1];
 
 			mat.elementos[f][c1] = mat.elementos[f][c2];
-			mat.elementos[f][c2] = aux;
+			mat.elementos[f][c2] = aux;*/
+
+			swap(mat, { f, c1 }, { f, c2 });
 		}
 	}
 
@@ -107,19 +113,21 @@ bool swapC(tMatrizChar& mat, int c1, int c2) {
 bool swapD(tMatrizChar& mat, int d) {
 	bool sePuede = true;
 
-	if (mat.numF != mat.numC || d >= mat.numC) {
+	if (mat.numF != mat.numC || d >= mat.numC || d < 0) {
 		sePuede = false;
 	}
 
 	else {
-		uchar aux = 'a';
+		//uchar aux = 'a';
 		int f = 0;
 
 		while (d < mat.numC) {
-			aux = mat.elementos[f][d];
+			/*aux = mat.elementos[f][d];
 
 			mat.elementos[f][d] = mat.elementos[d][f];
-			mat.elementos[d][f] = aux;
+			mat.elementos[d][f] = aux;*/
+
+			swap(mat, { f, d }, { d, f });
 
 			d++;
 			f++;
@@ -145,6 +153,7 @@ bool voltearF(tMatrizChar& mat, int f) {
 			mat.elementos[f][i] = fila_i[mat.numC - 1 - i];
 		}
 	}
+
 	return sePuede;
 };
 
@@ -164,6 +173,7 @@ bool voltearC(tMatrizChar& mat, int c) {
 			mat.elementos[i][c] = col_i[mat.numF - 1 - i];
 		}
 	}
+
 	return sePuede;
 };
 
@@ -185,6 +195,7 @@ bool voltearD(tMatrizChar& mat, int d) {
 			}
 		}
 	}
+
 	return sePuede;
 };
 
@@ -223,6 +234,7 @@ bool swapAdy(tMatrizChar& mat, tCoor pos1, tCoor pos2) {
 			swap(mat, {pos1.F + vecF[i], pos1.C + vecC[i]}, { pos2.F + vecF[i], pos2.C + vecC[i] });
 		}
 	}
+
 	return sePuede;
 }
 
@@ -240,6 +252,7 @@ bool voltearID(tMatrizChar& mat) {
 			}
 		}
 	}
+
 	return sePuede;
 }
 
@@ -251,9 +264,10 @@ bool vecinosValidos(tMatrizChar& mat, tCoor pos1, tCoor pos2) {
 	else if (abs(pos1.F - pos2.F) < 3 && abs(pos1.C - pos2.C) < 3) {
 		val = false;
 	}
+
 	return val;
 }
 
-bool coordenadaValida(const tMatrizChar& m, tCoor c) {
+bool coordenadaValidaEnMatriz(const tMatrizChar& m, tCoor c) {
 	return coordenadaValida(c) && c.F < m.numF&& c.C < m.numC;
 }

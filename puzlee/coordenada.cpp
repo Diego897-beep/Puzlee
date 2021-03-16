@@ -1,3 +1,5 @@
+// Authors: Carlos Barona y Diego Flores
+
 #include "coordenada.h"
 
 bool operator == (tCoor c1, tCoor c2) {

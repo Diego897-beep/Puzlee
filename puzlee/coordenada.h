@@ -1,9 +1,12 @@
-﻿#pragma once
+﻿// Authors: Carlos Barona y Diego Flores
+
+#pragma once
 
 #include <iostream>
 
 const int MAX_DIM = 64;
 
+// Vector auxiliar para mirar las posiciones vecinas
 const int vecF[8] = {-1, -1, -1, 0, 0, 1, 1, 1}; 
 const int vecC[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
 

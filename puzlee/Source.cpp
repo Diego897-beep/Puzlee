@@ -1,3 +1,5 @@
+// Authors: Carlos Barona y Diego Flores
+
 #include <iostream>
 #include <string>
 
@@ -5,7 +7,6 @@
 #include "matriz.h"
 #include "UtilidadesSYS.h"
 #include "juegoPM.h"
-// Authors: Carlos Barona y Diego Flores
 
 using namespace std;
 

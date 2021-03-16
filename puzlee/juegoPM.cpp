@@ -1,7 +1,9 @@
+// Authors: Carlos Barona y Diego Flores
+
 #include "juegoPM.h"
 
 void mostrarHelp(); // Hace un cout de todos los comandos disponnibles
-int acciones(string comando, int modo); // Devuelve un entero en funcion del comando introducido y del modo en el que este el jugador
+int acciones(string comando, string accion, int modo); // Devuelve un entero en funcion del comando introducido y del modo en el que este el jugador
 
 void mainJuegoPM() {
 	tJuegoPM juego;
@@ -168,11 +170,13 @@ bool jugar(tJuegoPM& jpm) {
 	mostrar(jpm);
 
 	while (jpm.intentosActuales < jpm.maxIntentos && !(jpm.imagenJugador == jpm.imagenObjetivo)) {
-
+		
 		// Si la accion es valida cuenta un intento
 		if (accion(jpm)) {
 			jpm.intentosActuales++;
 		}
+
+		//borrar();
 
 		mostrar(jpm);
 		pausa();
@@ -190,7 +194,7 @@ bool jugar(tJuegoPM& jpm) {
 }
 
 bool accion(tJuegoPM& jpm) {
-	string accion, comando, espacio = " ";
+	string accion = "", comando, espacio = " ";
 	int aux1 = -100, aux2 = -100, aux3 = -100, aux4 = -100;
 	bool accionPermitida = true;
 
@@ -204,7 +208,7 @@ bool accion(tJuegoPM& jpm) {
 	comando = accion.substr(0, accion.find(espacio));
 
 	// acciones() devuelve el numero del case en funcion del comando y del modo
-	int n = acciones(comando, jpm.modo);
+	int n = acciones(comando, accion, jpm.modo);
 	
 	// 2 switchs, 1 para cada modo, dentro de cada uno de ellos se lee los demas numeros auxiliares
 	if (jpm.modo == 1) {
@@ -346,28 +350,28 @@ void mostrarHelp() {
 	cout << "\n\n";
 }
 
-int acciones(string comando, int modo){
+int acciones(string comando, string accion, int modo){
 	int ind = -1;
 
 	// Los .length() se usan para comprobar que la cadena no viene solo con el comando sin indicar los demas valores
 
 	if (modo == 1) {
-		if (comando == "SF" && comando.length() >= 6) {
+		if (comando == "SF" && accion.length() >= 6) {
 			ind = 1;
 		}
-		else if (comando == "SC" && comando.length() >= 6) {
+		else if (comando == "SC" && accion.length() >= 6) {
 			ind = 2;
 		}
-		else if (comando == "SD" && comando.length() >= 4) {
+		else if (comando == "SD" && accion.length() >= 4) {
 			ind = 3;
 		}
-		else if (comando == "VF" && comando.length() >= 4) {
+		else if (comando == "VF" && accion.length() >= 4) {
 			ind = 4;
 		}
-		else if (comando == "VC" && comando.length() >= 4) {
+		else if (comando == "VC" && accion.length() >= 4) {
 			ind = 5;
 		}
-		else if (comando == "VD" && comando.length() >= 4) {
+		else if (comando == "VD" && accion.length() >= 4) {
 			ind = 6;
 		}
 		else if (comando == "HP") {
@@ -385,7 +389,7 @@ int acciones(string comando, int modo){
 		else if (comando == "RD") {
 			ind = 3;
 		}
-		else if (comando == "SA" &&comando.length() >= 10) {
+		else if (comando == "SA" && accion.length() >= 10) {
 			ind = 4;
 		}
 		else if (comando == "VD") {
