@@ -13,7 +13,6 @@ int main() {
 	chcp1252();
 
 	mainJuegoPM();
-	//Pd: Yolanda te queremos <3
 
 	return 0;
 }

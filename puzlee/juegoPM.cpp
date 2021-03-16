@@ -1,7 +1,7 @@
 #include "juegoPM.h"
 
 void mostrarHelp();
-int acciones(string comando, int& aux1, int& aux2, int& aux3, int& aux4, int modo);
+int acciones(string comando, int modo);
 
 void mainJuegoPM() {
 	tJuegoPM juego;
@@ -14,10 +14,10 @@ void mainJuegoPM() {
 		haGanado = jugar(juego);
 
 		if (haGanado) {
-			cout << "LO CONSEGUISTE!!! Enhorabuena Sra. García :D" << endl;
+			cout << "\n\nLO CONSEGUISTE!!\n\n";
 		}
 		else {
-			cout << "Perdiste puto :(";
+			cout << "\n\nPerdiste :(\n\n";
 		}
 	}
 }
@@ -44,7 +44,7 @@ int menu() {
 bool iniciar(tJuegoPM& jpm) {
 	bool ok = false;
 
-	if (cargar(jpm));{
+	if (cargar(jpm)){
 		ok = true;
 	}
 	return ok;
@@ -89,10 +89,21 @@ bool cargar(tJuegoPM& jpm) {
 
 void mostrar(const tJuegoPM& jpm) {
 	// Mostrar la foto del reto a resolver
+	cout << "   ";
+	for (int i = 0; i < jpm.imagenJugador.numC; i++) {
+		if (i < 10) {
+			cout << i << " ";
+		}
+		else {
+			cout << i;
+		}
+	}
+	cout << endl;
 	for (int fila = 0; fila < jpm.imagenJugador.numF; fila++) {
+		cout << setw(2) << left << fila << " ";
 		for (int col = 0; col < jpm.imagenJugador.numC; col++) {
 			colorCTA(0, uint8(jpm.imagenJugador.elementos[fila][col]));
-			cout << ' ';
+			cout << "  ";
 			colorCTA(15, 0);
 		}
 		cout << endl;
@@ -101,10 +112,21 @@ void mostrar(const tJuegoPM& jpm) {
 	cout << "\n\n";
 
 	// Mostrar la foto del objetivo
+	cout << "   ";
+	for (int i = 0; i < jpm.imagenObjetivo.numC; i++) {
+		if (i < 10) {
+			cout << i << " ";
+		}
+		else {
+			cout << i;
+		}
+	}
+	cout << endl;
 	for (int fila = 0; fila < jpm.imagenObjetivo.numF; fila++) {
+		cout << setw(2) << left << fila << " ";
 		for (int col = 0; col < jpm.imagenObjetivo.numC; col++) {
 			colorCTA(0, uint8(jpm.imagenObjetivo.elementos[fila][col]));
-			cout << ' ';
+			cout << "  ";
 			colorCTA(15, 0);
 		}
 		cout << endl;
@@ -147,28 +169,25 @@ bool jugar(tJuegoPM& jpm) {
 }
 
 bool accion(tJuegoPM& jpm) {
-	//string accion;
-	int n;
+	string accion, comando, espacio = " ";
 	int aux1 = 0, aux2 = 0, aux3 = 0, aux4 = 0;
-
-	cout << "Introduzca una accion: (HP para ayuda) ";
-	cin >> n;
-	cin >> aux1;
-	cin >> aux2;
-	cin >> aux3;
-	cin >> aux4;
-	//getline(cin, accion);
-
 	bool accionPermitida = true;
 
+	cout << "Introduzca una accion: (HP para ayuda) ";
 	
-	//int n = acciones(accion, aux1, aux2, aux2, aux4, jpm.modo);
+	cin.ignore();
+	getline(cin, accion);
+
+	comando = accion.substr(0, accion.find(espacio));
+
+	int n = acciones(comando, jpm.modo);
 	
 	if (jpm.modo == 1) {
 		switch (n) {
 
 		case 1:
-			
+			aux1 = stoi(accion.substr(3, accion.find(espacio)));
+			aux2 = stoi(accion.substr(5, accion.find(espacio)));
 
 			if (!swapF(jpm.imagenJugador, aux1, aux2)) {
 				accionPermitida = false;
@@ -176,6 +195,8 @@ bool accion(tJuegoPM& jpm) {
 			break;
 
 		case 2:
+			aux1 = stoi(accion.substr(3, accion.find(espacio)));
+			aux2 = stoi(accion.substr(5, accion.find(espacio)));
 
 			if (!swapC(jpm.imagenJugador, aux1, aux2)) {
 				accionPermitida = false;
@@ -183,13 +204,15 @@ bool accion(tJuegoPM& jpm) {
 			break;
 
 		case 3:
-
+			aux1 = stoi(accion.substr(3, accion.find(espacio)));
+			
 			if (!swapD(jpm.imagenJugador, aux1)) {
 				accionPermitida = false;
 			}
 			break;
 
 		case 4:
+			aux1 = stoi(accion.substr(3, accion.find(espacio)));
 
 			if (!voltearF(jpm.imagenJugador, aux1)) {
 				accionPermitida = false;
@@ -197,6 +220,7 @@ bool accion(tJuegoPM& jpm) {
 			break;
 
 		case 5:
+			aux1 = stoi(accion.substr(3, accion.find(espacio)));
 
 			if (!voltearC(jpm.imagenJugador, aux1)) {
 				accionPermitida = false;
@@ -204,6 +228,7 @@ bool accion(tJuegoPM& jpm) {
 			break;
 
 		case 6:
+			aux1 = stoi(accion.substr(3, accion.find(espacio)));
 
 			if (!voltearD(jpm.imagenJugador, aux1)) {
 
@@ -237,6 +262,10 @@ bool accion(tJuegoPM& jpm) {
 			break;
 
 		case 4:
+			aux1 = stoi(accion.substr(3, accion.find(espacio)));
+			aux2 = stoi(accion.substr(5, accion.find(espacio)));
+			aux3 = stoi(accion.substr(7, accion.find(espacio)));
+			aux4 = stoi(accion.substr(9, accion.find(espacio)));
 
 			if (!swapAdy(jpm.imagenJugador, { aux1, aux2 }, { aux3, aux4 })) {
 				accionPermitida = false;
@@ -275,7 +304,6 @@ bool accion(tJuegoPM& jpm) {
 
 
 void mostrarHelp() {
-	
 	cout << "\n\n";
 	cout << "Comandos permitidos!!" << endl;
 	cout << "MODO 1D" << endl;
@@ -295,75 +323,50 @@ void mostrarHelp() {
 	cout << "\n\n";
 }
 
-int acciones(string comando, int& aux1, int& aux2, int& aux3, int& aux4, int modo){
-	string accion;
+int acciones(string comando, int modo){
 	int ind = -1;
-	
-	accion[0] = comando[0];
-	accion[1] = comando[1];
-	
 
 	if (modo == 1) {
-		if (accion == "SF") {
-			aux1 = comando[3];
-			aux2 = comando[5];
-
+		if (comando == "SF"){
 			ind = 1;
 		}
-
-		else if (accion == "SC") {
-			aux1 = comando[3];
-			aux2 = comando[5];
-
+		else if (comando == "SC") {
 			ind = 2;
 		}
-		else if (accion == "SD") {
-			aux1 = comando[3];
-
+		else if (comando == "SD") {
 			ind = 3;
 		}
-		else if (accion == "VF") {
-			aux1 = comando[3];
-
+		else if (comando == "VF") {
 			ind = 4;
 		}
-		else if (accion == "VC") {
-			aux1 = comando[3];
-
+		else if (comando == "VC") {
 			ind = 5;
 		}
-		else if (accion == "VD") {
-			aux1 = comando[3];
-
+		else if (comando == "VD") {
 			ind = 6;
 		}
-		else if (accion == "HP") {
+		else if (comando == "HP") {
 			ind = 7;
 		}
 	}
 		
 	else if (modo == 2){
-		if (accion == "VV") {
+		if (comando == "VV") {
 			ind = 1;
 		}
-		else if (accion == "VH") {
+		else if (comando == "VH") {
 			ind = 2;
 		}
-		else if (accion == "RD") {
+		else if (comando == "RD") {
 			ind = 3;
 		}
-		else if (accion == "SA") {
-			aux1 = comando[3];
-			aux2 = comando[5];
-			aux3 = comando[7];
-			aux4 = comando[9];
-
+		else if (comando == "SA") {
 			ind = 4;
 		}
-		else if (accion == "VD") {
+		else if (comando == "VD") {
 			ind = 5;
 		}
-		else if (accion == "HP") {
+		else if (comando == "HP") {
 			ind = 6;
 		}
 	}

@@ -1,2 +1,4 @@
 C:\Users\Diego\source\repos\puzlee\puzlee\Debug\puzlee.exe
 C:\Users\Diego\source\repos\puzlee\puzlee\Debug\puzlee.pdb
+D:\Puzlee\puzlee\Debug\puzlee.exe
+D:\Puzlee\puzlee\Debug\puzlee.pdb
