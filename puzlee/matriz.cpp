@@ -73,14 +73,8 @@ bool swapF(tMatrizChar& mat, int f1, int f2) {
 		sePuede = false;
 	}
 	else {
-		//uchar aux = 'a';
 
 		for (int c = 0; c < mat.numC; c++) {
-			/*aux = mat.elementos[f1][c];
-
-			mat.elementos[f1][c] = mat.elementos[f2][c];
-			mat.elementos[f2][c] = aux;*/
-
 			swap(mat, { f1, c }, { f2, c });
 		}
 	}
@@ -95,14 +89,8 @@ bool swapC(tMatrizChar& mat, int c1, int c2) {
 		sePuede = false;
 	}
 	else {
-		//uchar aux = 'a';
 
 		for (int f = 0; f < mat.numC; f++) {
-			/*aux = mat.elementos[f][c1];
-
-			mat.elementos[f][c1] = mat.elementos[f][c2];
-			mat.elementos[f][c2] = aux;*/
-
 			swap(mat, { f, c1 }, { f, c2 });
 		}
 	}
@@ -118,15 +106,9 @@ bool swapD(tMatrizChar& mat, int d) {
 	}
 
 	else {
-		//uchar aux = 'a';
 		int f = 0;
 
 		while (d < mat.numC) {
-			/*aux = mat.elementos[f][d];
-
-			mat.elementos[f][d] = mat.elementos[d][f];
-			mat.elementos[d][f] = aux;*/
-
 			swap(mat, { f, d }, { d, f });
 
 			d++;

@@ -65,6 +65,7 @@ bool cargar(tJuegoPM& jpm) {
 	// Pide al usuario el nombre del fichero
 	cout << "Introduzca el nombre del fichero: ";
 	cin >> fichero;
+	cin.ignore();
 
 	// Actualiza el nombre de fichero segun el modo
 	if (jpm.modo == 1) {
@@ -170,13 +171,11 @@ bool jugar(tJuegoPM& jpm) {
 	mostrar(jpm);
 
 	while (jpm.intentosActuales < jpm.maxIntentos && !(jpm.imagenJugador == jpm.imagenObjetivo)) {
-		
+
 		// Si la accion es valida cuenta un intento
 		if (accion(jpm)) {
 			jpm.intentosActuales++;
 		}
-
-		//borrar();
 
 		mostrar(jpm);
 		pausa();
@@ -201,7 +200,6 @@ bool accion(tJuegoPM& jpm) {
 	// Pide la accion por pantalla
 	cout << "Introduzca una accion: (HP para ayuda) ";
 	
-	cin.ignore();
 	getline(cin, accion);
 
 	// Saca el comando
