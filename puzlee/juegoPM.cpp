@@ -100,58 +100,12 @@ bool cargar(tJuegoPM& jpm) {
 
 void mostrar(const tJuegoPM& jpm) {
 	// IMAGEN JUGADOR
-
-	// Fila de numeros
-	cout << "   ";
-	for (int i = 0; i < jpm.imagenJugador.numC; i++) {
-		if (i < 10) {
-			cout << i << " ";
-		}
-		else {
-			cout << i;
-		}
-	}
-
-	cout << endl;
-
-	// Muestra la imagen cambiando el color del fondo
-	for (int fila = 0; fila < jpm.imagenJugador.numF; fila++) {
-		cout << setw(2) << left << fila << " ";
-		for (int col = 0; col < jpm.imagenJugador.numC; col++) {
-			colorCTA(0, uint8(jpm.imagenJugador.elementos[fila][col]));
-			cout << "  ";
-			colorCTA(15, 0);
-		}
-		cout << endl;
-	}
+	mostrar(jpm.imagenJugador);
 
 	cout << "\n\n";
 
 	// IMAGEN OBJETIVO
-
-	// Fila de numeros
-	cout << "   ";
-	for (int i = 0; i < jpm.imagenObjetivo.numC; i++) {
-		if (i < 10) {
-			cout << i << " ";
-		}
-		else {
-			cout << i;
-		}
-	}
-
-	cout << endl;
-
-	// Muestra la imagen cambiando el color del fondo
-	for (int fila = 0; fila < jpm.imagenObjetivo.numF; fila++) {
-		cout << setw(2) << left << fila << " ";
-		for (int col = 0; col < jpm.imagenObjetivo.numC; col++) {
-			colorCTA(0, uint8(jpm.imagenObjetivo.elementos[fila][col]));
-			cout << "  ";
-			colorCTA(15, 0);
-		}
-		cout << endl;
-	}
+	mostrar(jpm.imagenObjetivo);
 
 	cout << "\n";
 

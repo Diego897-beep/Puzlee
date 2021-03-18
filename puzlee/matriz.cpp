@@ -48,6 +48,32 @@ bool operator == (const tMatrizChar& mat1, const tMatrizChar& mat2) {
 	return sonIguales;
 }
 
+void mostrar(const tMatrizChar m) {
+	// Muestra la fila de numeros
+	cout << "   ";
+	for (int i = 0; i < m.numC; i++) {
+		if (i < 10) {
+			cout << i << " ";
+		}
+		else {
+			cout << i;
+		}
+	}
+
+	cout << endl;
+
+	// Muestra la matriz entera cambiando de color
+	for (int fila = 0; fila < m.numF; fila++) {
+		cout << setw(2) << left << fila << " ";
+		for (int col = 0; col < m.numC; col++) {
+			colorCTA(0, uint8(m.elementos[fila][col]));
+			cout << "  ";
+			colorCTA(15, 0);
+		}
+		cout << endl;
+	}
+}
+
 bool swap(tMatrizChar& mat, tCoor pos1, tCoor pos2) {
 	bool sePuede = true;
 	
@@ -251,5 +277,5 @@ bool vecinosValidos(tMatrizChar& mat, tCoor pos1, tCoor pos2) {
 }
 
 bool coordenadaValidaEnMatriz(const tMatrizChar& m, tCoor c) {
-	return coordenadaValida(c) && c.F < m.numF&& c.C < m.numC;
+	return coordenadaValida(c) && c.F < m.numF && c.C < m.numC;
 }
