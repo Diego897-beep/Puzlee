@@ -171,7 +171,7 @@ bool voltearC(tMatrizChar& mat, int c) {
 	else {
 
 		for (int i = 0; i < (mat.numF / 2); i++) {
-			swap(mat, { i, c }, { mat.numF - 1 - i });
+			swap(mat, { i, c }, { mat.numF - 1 - i , c});
 		}
 	}
 
