@@ -4,7 +4,10 @@
 
 #include <iostream>
 #include <fstream>
+#include <iomanip>
+
 #include "coordenada.h"
+#include "UtilidadesSYS.h"
 
 using namespace std;
 
@@ -24,6 +27,9 @@ bool cargar(tMatrizChar& mat, ifstream& ent);
 
 // Operador de igualdad en matrices
 bool operator == (const tMatrizChar& mat1, const tMatrizChar& mat2);
+
+// Muestra una matriz con colores
+void mostrar(const tMatrizChar m);
 
 // Intercambia las posiciones pos1 y pos2 en la matriz mat
 bool swap(tMatrizChar& mat, tCoor pos1, tCoor pos2);

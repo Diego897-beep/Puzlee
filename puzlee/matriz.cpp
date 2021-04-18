@@ -48,6 +48,32 @@ bool operator == (const tMatrizChar& mat1, const tMatrizChar& mat2) {
 	return sonIguales;
 }
 
+void mostrar(const tMatrizChar m) {
+	// Muestra la fila de numeros
+	cout << "   ";
+	for (int i = 0; i < m.numC; i++) {
+		if (i < 10) {
+			cout << i << " ";
+		}
+		else {
+			cout << i;
+		}
+	}
+
+	cout << endl;
+
+	// Muestra la matriz entera cambiando de color
+	for (int fila = 0; fila < m.numF; fila++) {
+		cout << setw(2) << left << fila << " ";
+		for (int col = 0; col < m.numC; col++) {
+			colorCTA(0, uint8(m.elementos[fila][col]));
+			cout << "  ";
+			colorCTA(15, 0);
+		}
+		cout << endl;
+	}
+}
+
 bool swap(tMatrizChar& mat, tCoor pos1, tCoor pos2) {
 	bool sePuede = true;
 	
@@ -69,18 +95,12 @@ bool swap(tMatrizChar& mat, tCoor pos1, tCoor pos2) {
 bool swapF(tMatrizChar& mat, int f1, int f2) {
 	bool sePuede = true;
 	
-	if (f1 >= mat.numF || f2 >= mat.numF) {
+	if (f1 >= mat.numF || f2 >= mat.numF || f1 < 0 || f2 < 0) {
 		sePuede = false;
 	}
 	else {
-		//uchar aux = 'a';
 
 		for (int c = 0; c < mat.numC; c++) {
-			/*aux = mat.elementos[f1][c];
-
-			mat.elementos[f1][c] = mat.elementos[f2][c];
-			mat.elementos[f2][c] = aux;*/
-
 			swap(mat, { f1, c }, { f2, c });
 		}
 	}
@@ -95,14 +115,8 @@ bool swapC(tMatrizChar& mat, int c1, int c2) {
 		sePuede = false;
 	}
 	else {
-		//uchar aux = 'a';
 
-		for (int f = 0; f < mat.numC; f++) {
-			/*aux = mat.elementos[f][c1];
-
-			mat.elementos[f][c1] = mat.elementos[f][c2];
-			mat.elementos[f][c2] = aux;*/
-
+		for (int f = 0; f < mat.numF; f++) {
 			swap(mat, { f, c1 }, { f, c2 });
 		}
 	}
@@ -113,23 +127,18 @@ bool swapC(tMatrizChar& mat, int c1, int c2) {
 bool swapD(tMatrizChar& mat, int d) {
 	bool sePuede = true;
 
-	if (mat.numF != mat.numC || d >= mat.numC || d < 0) {
+	if (mat.numF != mat.numC || abs(d) >= mat.numC) {
 		sePuede = false;
 	}
 
 	else {
-		//uchar aux = 'a';
 		int f = 0;
+		int n = abs(d);
 
-		while (d < mat.numC) {
-			/*aux = mat.elementos[f][d];
+		while (n < mat.numC) {
+			swap(mat, { f, n }, { n, f });
 
-			mat.elementos[f][d] = mat.elementos[d][f];
-			mat.elementos[d][f] = aux;*/
-
-			swap(mat, { f, d }, { d, f });
-
-			d++;
+			n++;
 			f++;
 		}
 	}
@@ -144,18 +153,14 @@ bool voltearF(tMatrizChar& mat, int f) {
 		sePuede = false;
 	} 
 	else {
-		tVector fila_i;
-		for (int i = 0; i < mat.numC; i++) {
-			fila_i[i] = mat.elementos[f][i];
-		}
 
-		for (int i = 0; i < mat.numC; i++) {
-			mat.elementos[f][i] = fila_i[mat.numC - 1 - i];
+		for (int i = 0; i < (mat.numC / 2); i++) {
+			swap(mat, { f, i }, { f, mat.numC - 1 - i });
 		}
 	}
 
 	return sePuede;
-};
+}
 
 bool voltearC(tMatrizChar& mat, int c) {
 	bool sePuede = true;
@@ -164,18 +169,14 @@ bool voltearC(tMatrizChar& mat, int c) {
 		sePuede = false;
 	}
 	else {
-		tVector col_i;
-		for (int i = 0; i < mat.numF; i++) {
-			col_i[i] = mat.elementos[i][c];
-		}
 
-		for (int i = 0; i < mat.numF; i++) {
-			mat.elementos[i][c] = col_i[mat.numF - 1 - i];
+		for (int i = 0; i < (mat.numF / 2); i++) {
+			swap(mat, { i, c }, { mat.numF - 1 - i , c});
 		}
 	}
 
 	return sePuede;
-};
+}
 
 bool voltearD(tMatrizChar& mat, int d) {
 	bool sePuede = true;
@@ -185,19 +186,19 @@ bool voltearD(tMatrizChar& mat, int d) {
 	}
 	else {
 		if (d >= 0) {
-			for (int i = 0; i < mat.numF - 1 - d; i++) {
+			for (int i = 0; i < (mat.numF - d) / 2; i++) {
 				swap(mat, { i, i + d }, { mat.numF - 1 - i - d, mat.numC - 1 - i });
 			}
 		}
 		else {
-			for (int i = 0; i < mat.numF - 1 + d; i++) {
+			for (int i = 0; i < (mat.numF + d) / 2; i++) {
 				swap(mat, { i - d, i }, { mat.numF - 1 - i, mat.numC - 1 - i + d });
 			}
 		}
 	}
 
 	return sePuede;
-};
+}
 
 void voltearV(tMatrizChar& mat) {
 	for (int i = 0; i < (mat.numC / 2); i++) {
@@ -269,5 +270,5 @@ bool vecinosValidos(tMatrizChar& mat, tCoor pos1, tCoor pos2) {
 }
 
 bool coordenadaValidaEnMatriz(const tMatrizChar& m, tCoor c) {
-	return coordenadaValida(c) && c.F < m.numF&& c.C < m.numC;
+	return coordenadaValida(c) && c.F < m.numF && c.C < m.numC;
 }

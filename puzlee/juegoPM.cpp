@@ -8,17 +8,24 @@ int acciones(string comando, string accion, int modo); // Devuelve un entero en 
 void mainJuegoPM() {
 	tJuegoPM juego;
 	
+	bool jugamos = true;
 	bool haGanado = true;
 
 	// Si inicia correctamente procede a jugar
-	if (iniciar(juego)) {
-		haGanado = jugar(juego);
+	while (jugamos) {
+		if (iniciar(juego)) {
+			haGanado = jugar(juego);
 
-		if (haGanado) {
-			cout << "\n\nLO CONSEGUISTE!!\n\n";
+			if (haGanado) {
+				cout << "\n\nLO CONSEGUISTE!!\n\n";
+			}
+			else {
+				cout << "\n\nPerdiste :(\n\n";
+			}
 		}
 		else {
-			cout << "\n\nPerdiste :(\n\n";
+			jugamos = false;
+			cout << "Hasta luegoooo!!!" << endl;
 		}
 	}
 }
@@ -61,96 +68,64 @@ bool iniciar(tJuegoPM& jpm) {
 bool cargar(tJuegoPM& jpm) {
 	string fichero;
 	bool ok = false;
+	bool nombreOk = false;
 
-	// Pide al usuario el nombre del fichero
-	cout << "Introduzca el nombre del fichero: ";
-	cin >> fichero;
 
-	// Actualiza el nombre de fichero segun el modo
-	if (jpm.modo == 1) {
-		fichero += "_1D.txt";
-	}
-	else if (jpm.modo == 2) {
-		fichero += "_2D.txt";
-	}
-	else {
-		cout << "\n\nModo desconocido\n\n";
-	}
+	do {
 
-	ifstream archivo;
-	archivo.open(fichero);
+		// Pide al usuario el nombre del fichero
+		cout << "Introduzca el nombre del fichero (SALIR para salir): ";
+		cin >> fichero;
+		cin.ignore();
 
-	if (archivo.is_open()) {
-		// Carga la imagen del jugador y a continuación la imagen objetivo
-		cargar(jpm.imagenJugador, archivo);
-		cargar(jpm.imagenObjetivo, archivo);
+		if (fichero == "SALIR") { // Centinela de archivos
+			nombreOk = true;
+		}
+		else {
 
-		// Cargar el numero de intentos máximos
-		archivo >> jpm.maxIntentos;
-		ok = true;
-	}
-	else {
-		cout << "\n\nNo se pudo abrir el archivo\n\n";
-	}
-	archivo.close();
+			// Actualiza el nombre de fichero segun el modo
+			if (jpm.modo == 1) {
+				fichero += "_1D.txt";
+			}
+			else if (jpm.modo == 2) {
+				fichero += "_2D.txt";
+			}
+			else {
+				cout << "\n\nModo desconocido\n\n";
+			}
+
+			ifstream archivo;
+			archivo.open(fichero);
+
+			if (archivo.is_open()) {
+				nombreOk = true;
+				// Carga la imagen del jugador y a continuación la imagen objetivo
+				cargar(jpm.imagenJugador, archivo);
+				cargar(jpm.imagenObjetivo, archivo);
+
+				// Cargar el numero de intentos máximos
+				archivo >> jpm.maxIntentos;
+				ok = true;
+			}
+			else {
+				cout << "\n\nNo se pudo abrir el archivo\n\n";
+			}
+			archivo.close();
+		}
+
+	} while (!nombreOk);
 
 	return ok;
 }
 
 void mostrar(const tJuegoPM& jpm) {
 	// IMAGEN JUGADOR
-
-	// Fila de numeros
-	cout << "   ";
-	for (int i = 0; i < jpm.imagenJugador.numC; i++) {
-		if (i < 10) {
-			cout << i << " ";
-		}
-		else {
-			cout << i;
-		}
-	}
-
-	cout << endl;
-
-	// Muestra la imagen cambiando el color del fondo
-	for (int fila = 0; fila < jpm.imagenJugador.numF; fila++) {
-		cout << setw(2) << left << fila << " ";
-		for (int col = 0; col < jpm.imagenJugador.numC; col++) {
-			colorCTA(0, uint8(jpm.imagenJugador.elementos[fila][col]));
-			cout << "  ";
-			colorCTA(15, 0);
-		}
-		cout << endl;
-	}
+	mostrar(jpm.imagenJugador);
 
 	cout << "\n\n";
 
 	// IMAGEN OBJETIVO
-
-	// Fila de numeros
-	cout << "   ";
-	for (int i = 0; i < jpm.imagenObjetivo.numC; i++) {
-		if (i < 10) {
-			cout << i << " ";
-		}
-		else {
-			cout << i;
-		}
-	}
-
-	cout << endl;
-
-	// Muestra la imagen cambiando el color del fondo
-	for (int fila = 0; fila < jpm.imagenObjetivo.numF; fila++) {
-		cout << setw(2) << left << fila << " ";
-		for (int col = 0; col < jpm.imagenObjetivo.numC; col++) {
-			colorCTA(0, uint8(jpm.imagenObjetivo.elementos[fila][col]));
-			cout << "  ";
-			colorCTA(15, 0);
-		}
-		cout << endl;
-	}
+	mostrar(jpm.imagenObjetivo);
 
 	cout << "\n";
 
@@ -170,13 +145,11 @@ bool jugar(tJuegoPM& jpm) {
 	mostrar(jpm);
 
 	while (jpm.intentosActuales < jpm.maxIntentos && !(jpm.imagenJugador == jpm.imagenObjetivo)) {
-		
+
 		// Si la accion es valida cuenta un intento
 		if (accion(jpm)) {
 			jpm.intentosActuales++;
 		}
-
-		//borrar();
 
 		mostrar(jpm);
 		pausa();
@@ -201,7 +174,6 @@ bool accion(tJuegoPM& jpm) {
 	// Pide la accion por pantalla
 	cout << "Introduzca una accion: (HP para ayuda) ";
 	
-	cin.ignore();
 	getline(cin, accion);
 
 	// Saca el comando
