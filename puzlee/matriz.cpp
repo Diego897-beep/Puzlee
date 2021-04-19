@@ -181,7 +181,7 @@ bool voltearC(tMatrizChar& mat, int c) {
 bool voltearD(tMatrizChar& mat, int d) {
 	bool sePuede = true;
 	
-	if ((d > mat.numC)|| (mat.numF != mat.numC)) {
+	if ((abs(d) >= mat.numC)|| (mat.numF != mat.numC)) {
 		sePuede = false;
 	}
 	else {
